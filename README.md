@@ -41,71 +41,50 @@ Before, we get started with the actual implementation, we need to perform some p
 ```diff
 - TODO
 ```
+  * **srv** folder and its artifacts:
+    ** **application** folder contains the business logic that we will extend in this code jam. It also contains the JS based frontend components in the **webapp** subfolder. We will only focus on backend components, though.
+    ** **integration-tests** and **unit-tests** folders include integration and unit tests. We have already prepared the integration tests for your application, they do not pass yet, though, and therefore are ignored for now.
+    ** **pom.xml** is a [maven configuration file](https://maven.apache.org/pom.html)
+  * **.gitignore** file is used to exclude certain files in your working directory from your Git history
+  * **mta.yaml** is a build and deployment descriptor to be able to build and deploy the application in SAP Cloud Platform, Cloud Foundry.
+```diff
+- TODO: Provide solutions folder? Describe how to look it up?
+```
 
-  * **application** folder contains the business logic that we will extend in this code jam. It also contains the JS based frontend components in the **webapp** subfolder. We will only focus on backend components, though.
-  * **integration-tests** and **unit-tests** folders include integration and unit tests. We have already prepared the integration tests for your application, they do not pass yet, though, and therefore are ignored for now.
-  * **solutions** is another important folder that you can use when you get need help with the exercises and want to look up the solution. It contains the full source code of the solutions.
-  * **pom.xml** is a [maven configuration file](https://maven.apache.org/pom.html)
-  * **manifest.yml** is a deployment descriptor to be able to deploy the application in SAP Cloud Platform, Cloud Foundry.
+Before we get started with the development, let us familiarize ourselves on how to build and execute tests of the application in WebIDE without deploying it in SAP Cloud Platform. That will help us to quickly test changes in the application that we will perform in the next steps.
 
-Before we get started with the development, let us build and deploy the current state of the application locally.
-
-### Build and test
 While building the application, we will execute integration tests. For the integration tests, you need to provide the URL and credentials of your SAP S/4HANA system.
-* Open the file `integration-tests/src/test/resources/systems.yml`.
-As we will be using the pre-deployed mock server in this code jam, please make sure that the file contains the following content:
+* Open the file `srv/integration-tests/src/test/resources/systems.yml`.
+As we will be using the parameters of the provided SAP S/4HANA system in this code jam, please make sure that the file contains the following content. 
+```diff
+- TODO: Put correct S4 URL
+```
+
 ```
 ---
 erp:
-  default: "MOCK_SYSTEM"
+  default: "S4HANA"
   systems:
-#    - alias: "ERP_SYSTEM"
-#      uri: "https://myXXXXXX.s4hana.ondemand.com"
-#      proxy: "http://proxy:8080"
-    - alias: "MOCK_SYSTEM"
+    - alias: "S4HANA"
       uri: "https://odata-mock-server-shy-sitatunga.cfapps.eu10.hana.ondemand.com/"
 
 ```
-In case you are working on this code jam after the seminar, make sure to substitute the mock server URL with your own one.
-* In the same directory, create a `credentials.yml` file used during tests with the following content:
+* In the same directory, create a `credentials.yml` file used during tests with the following content and make sure to put the correct name and password provided by the code jam instructor.
 ```
 ---
 credentials:
-- alias: "MOCK_SYSTEM"
+- alias: "S4HANA"
   username: "(username)"
   password: "(password)"
 ```
-As the mock server does not require authentication, you do not need to update the username and password in this file.
-* In the root folder of the project, run the following command to build and test the application:
-```
-mvn clean install
-```
 
-### Deploy locally
-After you have successfully built the project, you can deploy it locally as follows. This will start a local server that hosts your application.
-* Configure your local environment by setting the following environment variables. Replace the URL and credentials with the appropriate values for your SAP S/4HANA Cloud system in case you are not using the provided mock server.
-* Adapt the below commands for setting environment variables as appropriate for your operating system. The following commands are for the Windows command line:
-```
-set destinations=[{name: 'ErpQueryEndpoint', url: 'https://odata-mock-server-shy-sitatunga.cfapps.eu10.hana.ondemand.com/', username: 'USERNAME', password: 'PASSWORD'}]
-set ALLOW_MOCKED_AUTH_HEADER=true
-```
-For Mac, use the following commands:
-```
-export destinations="[{name: 'ErpQueryEndpoint', url: 'https://odata-mock-server-shy-sitatunga.cfapps.eu10.hana.ondemand.com/', username: 'USERNAME', password: 'PASSWORD'}]"
-export ALLOW_MOCKED_AUTH_HEADER=true
-```
-* Run the following commands to deploy the application on a local server.
-```
-mvn tomee:run -pl application
-```
-* Open the URL http://localhost:8080/address-manager in your browser to see the frontend of the launched application.
+After this, right clink on the "srv" folder and choose Build -> Build and Run Tests. Wait till the build finishes and make sure that you get "SUCCESS" for all the executed steps: Root, Application, Unit Tests, Integration Tests.
 
-At this phase, we do not have any data returned from the application and we see the runtime exception in the console, saying that we need to implement the functionality. Let us start with the first step: integrating SAP S/4HANA into this application using the SAP S/4HANA Cloud SDK.
+Now, after we got familiar with the local testing of the application, let us start with the first step: integrating SAP S/4HANA into this application using the SAP S/4HANA Cloud SDK.
 
 ## <a name="task1">Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model</a>
 In this step, we will investigate two queries to SAP S/4HANA to retrieve business partner data. Firstly, we will retrieve the list of business partners for the list view in  the application. Secondly, we will take a look at the query retrieving detailed data of a single business partner by ID.
 
-### Implement the SAP S/4HANA Integration
 Start the development of queries by looking into the class BusinessPartnerServlet, which is the servlet exposing the business partner APIs. 
 We could use any API framework here, such as JAX-RS or Spring. However, we use a servlet here for simplicity. Looking into the servlet, we can see that the main functionality is moved out into the commands GetAllBusinessPartnersCommand and GetSingleBusinessPartnerByIdCommand. Open and implement the command *GetAllBusinessPartnersCommand* as explained below.
 
@@ -115,25 +94,22 @@ The *GetAllBusinessPartnersCommand* should return a list of available business p
 * There are multiple categories of business partners. In this session, we only want to retrieve persons. The category is identified by a number, which is stored in the static class variable called *CATEGORY_PERSON*. The method to filter is called *filter* and can be executed on the result from the previous step.
 The property *BusinessPartner.BUSINESS_PARTNER_CATEGORY* should equal *CATEGORY_PERSON*. To express that use the methods provided by the object *BusinessPartner.BUSINESS_PARTNER_CATEGORY*.
 * All the previous steps did not execute any requests, but just defined the request. With the method *execute* you finally execute the query and retrieve the result.
+
+```diff
+- TODO: Solution folder?
 Hint: Try to solve it on your own. However, the solution can also be found in the solution folder in the session material.
+```
 
 Now, also take a look at he command *GetSingleBusinessPartnerByIdCommand*. It was already implemented for you. Based on this source code, can you find out how the OData "expand" method can be implemented using the Virtual Data Model of the SAP S/4HANA Cloud SDK? Hint: addresses of business partners are retrieved using *expand*.
 
-To check whether the queries are implemented correctly, go to the integration-tests folder and remove the *@Ignore* annotation for the following tests: *BusinessPartnerServletTest.testGetAll()* and *BusinessPartnerServletTest.testGetSingle()*.
-Now, build and test the application and make sure that the tests ran successfully. 
-```
-mvn clean install
-```
+To check whether the queries are implemented correctly, go to the integration-tests folder and remove the *@Ignore* annotation for the following test: *BusinessPartnerServletTest.testGetAll()*.
+Now, build and test the application as described in [Task 0](#task0) and make sure that the tests ran successfully. 
 
-If the uncommented test do not show errors, congratulations! You have successfully integrated SAP S/4HANA with your application. 
+If the uncommented test do not show errors, congratulations! You have successfully integrated SAP S/4HANA with your application. Now, it is time to think about how we can continuously deliver this application.
 
-### Deploy Locally
-You can also deploy the application locally and see the business partner data from the S/4HANA Mock server:
+```diff
+- TODO
 ```
-mvn tomee:run -pl application
-```
-
-![Business partner address manager](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/AddressManager.PNG)
 
 ### Deploy in SAP Cloud Platform, Cloud Foundry
 Generally, you can use several ways to deploy your applications in SAP Cloud Platform. The recommended way to do it for productive applications is to use the [Continuous Delivery Toolkit](https://github.com/SAP/cloud-s4-sdk-pipeline), which also ensures that your source code is properly tested and checked before being deployed. 
