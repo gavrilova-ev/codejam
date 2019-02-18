@@ -1,6 +1,6 @@
 # SAP Leonardo Machine Learning Foundation and the SAP S/4HANA Cloud SDK
 Here, we provide the instructions to proceed with the code jam "SAP Leonardo Machine Learning and the SAP S/4HANA Cloud SDK". Below, you find the following information:
-* [Technical prerequisites](#prerequisites): software required to execute the steps described in this documentation. This information was provided before the workshop, so, we assume that those prerequisites are already fulfilled. Nevertheless, you can use this description to double check.
+* [Technical prerequisites](#prerequisites): setup required to execute the steps described in this documentation. This information was provided before the workshop, so, we assume that those prerequisites are already fulfilled. Nevertheless, you can use this description to double check.
 * [Task 0: Preparation steps](#task0)
 * [Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model](#task1)
 * [Task 2: Integrate SAP Leonardo Machine Learning service to provide translations](#task2)
@@ -9,30 +9,23 @@ Here, we provide the instructions to proceed with the code jam "SAP Leonardo Mac
 So, let us get started!
 
 ## <a name="prerequisites">Technical prerequisites</a>
-Please, find the local setup and how to install the required software in the blog post [Step 1 with SAP S/4HANA Cloud SDK: Set up](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/).
-Make sure to install all the mentioned tool, including the IDE. All the exercises in the code jam are based on the local development environment.
+You do not need any additional software installed locally for this code jam, as we will use the full stack WebIDE for development. All the steps of this code jam also are described considering that you re using the WebIDE.
 
-Verify your installation by running `javac -version` and `mvn -version` on a command line shell. The output should look similar to the following:
+Note that you can also use local development environment if you prefer. In case you want to use the local IDE, please make sure to follow the local setup and how to install the required software in the blog post [Step 1 with SAP S/4HANA Cloud SDK: Set up](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/). Make sure to install all the mentioned tool, including the IDE. 
+
+```diff
+- TODO: describe trial on GCP or remove (if an account is provided)
 ```
-> javac -version
-javac 1.8.0_72
-
-> mvn -version
-Apache Maven 3.5.0 (ff8f5e7444045639af65f6095c62210b5713f426; 2017-04-03T21:39:06+02:00)
-Maven home: C:\Program Files\path\to\maven\bin\..
-Java version: 1.8.0_72, vendor: Oracle Corporation
-Java home: C:\Program Files\path\to\java\jdk1.8.0_72\jre
-...
-```
-Check that the environment variable `JAVA_HOME` points to the path of your JDK installation, e.g., `C:\Program Files\path\to\java\jdk1.8.0_72`.
-
 We will deploy the application in SAP Cloud Platform, Cloud Foundry. For that purpose, you would require your own trial account. [Here](https://cloudplatform.sap.com/try.html), you can find information on how to get your trial account in SAP Cloud Platform, Cloud Foundry. 
 
-For this workshop, we provide a running SAP S/4HANA Mock server that mocks business partner APIs, so you do not need to set up it by yourself. You can assess the mock server via the URL: https://odata-mock-server-shy-sitatunga.cfapps.eu10.hana.ondemand.com/. The mock server does not require authentication.
-In case you want to try out this hands on later and the service is not available, follow [this description](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html) to set up your own instance of the mock server.
+For this workshop, we provide a ready to use SAP S/4HANA system that you can integrate into your SAP Cloud Platform application using the APIs. You can address the system via the URL:
+```diff
+- TODO: provide URL to CAL system
+```
+Please, reach out to your instructors to get your cfredentials to this system.
 
 ## <a name="task0">Task 0: Preparation steps</a>
-Before, we get started with the actual implementation, we need to perform some preparation steps and familiarize ourselves with the project structure. 
+Before, we get started with the actual implementation, we need to perform some preparation steps and familiarize ourselves with the project structure.
 * Download the [archive with the initial project version](https://github.com/gavrilova-ev/codejam/archive/master.zip) from the GitHub
 * Load into your IDE as a Maven project
 * Investigate your project structure:
