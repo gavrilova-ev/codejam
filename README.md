@@ -3,8 +3,9 @@ Here, we provide the instructions to proceed with the code jam "SAP Leonardo Mac
 * [Technical prerequisites](#prerequisites): setup required to execute the steps described in this documentation. This information was provided before the workshop, so, we assume that those prerequisites are already fulfilled. Nevertheless, you can use this description to double check.
 * [Task 0: Preparation steps](#task0)
 * [Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model](#task1)
-* [Task 2: Integrate SAP Leonardo Machine Learning service to provide translations](#task2)
-* [Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model](#task3)
+* [Task 2: Set up the Continuous Delivery Toolkit and the CI/CD pipeline of the S/4HANA Cloud SDK in GKE](#task2)
+* [Task 3: Integrate SAP Leonardo Machine Learning service to provide translations](#task3)
+* [Bonus, Task 4: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model](#task4)
 
 So, let us get started!
 
@@ -105,19 +106,24 @@ Now, also take a look at he command *GetSingleBusinessPartnerByIdCommand*. It wa
 To check whether the queries are implemented correctly, go to the integration-tests folder and remove the *@Ignore* annotation for the following test: *BusinessPartnerServletTest.testGetAll()*.
 Now, build and test the application as described in [Task 0](#task0) and make sure that the tests ran successfully. 
 
-If the uncommented test do not show errors, congratulations! You have successfully integrated SAP S/4HANA with your application. Now, it is time to think about how we can continuously deliver this application.
-
+If the unignored test do not show errors, congratulations! You have successfully integrated SAP S/4HANA with your application.
+IN this case, let us push the local changes into our remote GitHub repository. 
 ```diff
-- TODO
+- TODO: 
+describe with screenshots how to push a changed Java file from WebIDE
 ```
 
-### Deploy in SAP Cloud Platform, Cloud Foundry
-Generally, you can use several ways to deploy your applications in SAP Cloud Platform. The recommended way to do it for productive applications is to use the [Continuous Delivery Toolkit](https://github.com/SAP/cloud-s4-sdk-pipeline), which also ensures that your source code is properly tested and checked before being deployed. 
-Alternatively, you can do it manually using the [CLI of Cloud Foundry](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html).
+Now, it is time to think about how we can continuously deliver this application.
+
+## <a name="task2">Task 2: Set up the Continuous Delivery Toolkit and the CI/CD pipeline of the S/4HANA Cloud SDK in GKE</a>
+Generally, you can use several ways to deploy your applications in SAP Cloud Platform. The recommended way for productive applications is to use the [Continuous Delivery Toolkit](https://github.com/SAP/cloud-s4-sdk-pipeline), which also ensures that our source code is properly tested and checked before being deployed. 
+
+In this task, we will setup the Continuous Delivery Toolkit on GKE and SAP Cloud Platform account - everything we need to successfully deploy our application in an automated manner in SAP Cloud Platform account.
+
+### Prepare SAP Cloud Platform Account
 Here, we describe how to deploy your application manually using the SAP Cloud Platform, Cloud Foundry Cockpit. Necessary preliminary steps are also described here.
 * Create service instances for S/4HANA connectivity
 * Create destination endpoints
-* Deploy the application using the SAP Cloud Platform cockpit
 
 Firstly, create an instance of the destination service to connect to SAP S/4HANA (mock) system. For that, in the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose the destination service from the catalog.
 Instantiate the service with all the default parameters. Give the name my-destination to your instance.
@@ -126,55 +132,50 @@ Instantiate the service with all the default parameters. Give the name my-destin
 Secondly, create an instance of the Authorization and Trust Management service. In the Service Marketplace, choose the Authorization and Trust Management service and instantiate it with the default parameters. Give the name my-xsuaa to your service instance.
 ![Authorization and Trust Management](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/uaa.PNG)
 
-Next, we will create a destination endpoint to connect to the S/4HANA mock server.
+Next, we will create a destination endpoint to connect to the provided SAP S/4HANA system.
 You can find the configuration of the destination endpoints on the level of your subaccount by choosing Connectivity -> Destinations.
 Then, you can create a new destination endpoint by choosing "New Destination".
 
-For the S/4HANA connectivity, create the destination with the following parameters: <br>
+For the S/4HANA connectivity, create the destination with the following parameters. Make sure to put user credentials provided by the instructor. Those are the same credentials that you have used for testing in WebIDE in [Task 0](#task0) <br>
+```diff
+- TODO: 
+add correct S4 URL
+```
 Name: ErpQueryEndpoint <br>
 Type: HTTP <br>
 URL: https://odata-mock-server-shy-sitatunga.cfapps.eu10.hana.ondemand.com/ <br>
 Proxy type: Internet <br>
-Authentication: NoAuthentication <br>
+Authentication: BasicAuthentication <br>
+User: (username) <br>
+Password: (password) <br>
 
-Now, we are ready to deploy our application in SAP Cloud Platform, Cloud Foundry.
-Firstly, go to your project *manifest.yml* file and adapt the application name, adding your P-user to avoid domain collisions with the other participants. For example:
+Now, we are ready to deploy our application in SAP Cloud Platform, Cloud Foundry. We will do it using the Continuous Delivery Toolkit that is also testing the application and ensures the code quality in the next step.
 
+### Set up Continuous Delivery Toolkit in GKE
+```diff
+- TODO: 
+modify the linked Google next tutorial removing google next-specific points
+and adding the Jenkins configurations: 
+test credentials
+deployment credentials
 ```
----
-applications:
-
-- name: address-manager-ml-Pxxxxxxxxxx
-  memory: 768M
-  random-route: true
-  path: application/target/address-manager-application.war
-  buildpack: sap_java_buildpack
-  env:
-    TARGET_RUNTIME: tomee
-    JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:96m..'
-    SET_LOGGING_LEVEL: '{ROOT: INFO, com.sap.cloud.sdk: INFO}'
-    ALLOW_MOCKED_AUTH_HEADER: true
-  services:
-    - my-xsuaa
-    - my-destination
-```
-
-Secondly, in your development space, choose Application -> Deploy Application. Choose the location of your archive (see the folder application/target/address-manager-application.war) and the corresponding manifest.yml file, as shown in the Figure.
-
-![Application Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deployment.PNG)
-
-When the application is deployed, you can drill down into the application, choose the link for the application and append "/address-manager" to it. You should be able to see the business partner coming back from the mock server.
+https://developers.sap.com/tutorials/s4sdk-continuous-delivery-toolkit-setup.html
 
 If you still have time, continue with the next task.
-In the next step, we will see how to integrate one of the SAP Leonardo Machine Learning services in few lines of code.
+In the next step, we will see how to integrate one of the SAP Leonardo Machine Learning services into your application.
 
-## <a name="task2">Task 2: Integrate SAP Leonardo Machine Learning service to provide translations</a>
+## <a name="task3">Task 3: Integrate SAP Leonardo Machine Learning services</a>
+```diff
+- TODO: 
+consider introducing the OCR use case (business cards)
+```
+
 In this step, we will integrate SAP Leonardo Machine Learning services into an application using an example of the translation service, which is a part of the set of functional services.
 
 There are several steps involved to make the integration with SAP Leonardo ML services work, those steps are described in details below:
 * Implement the integration with ML services in Java Backend
 * Create service instance for Leonardo ML integration
-* Deploy the application using the SAP Cloud Platform cockpit
+* Deploy the application using the CI/CD pipeline prepared in the previous step
 
 ### Implement the integration with ML services in Java Backend 
 To implement the integration with ML services, we will leverage the SAP S/4HANA Cloud SDK component that simplifies the integration and handles the boilerplate code for you, such as OAuth 2.0 authentication against ML services.
@@ -184,7 +185,7 @@ To implement the integration, find the package *machinelearning* in your project
 Navigate to the class *MlTranslationCommand* and investigate its methods. Here, in the method *executeRequest*, you will find the next task. 
 In this method, we already provide the logic for the execution of the translation request using the instance of *LeonardoMlService* class and retrive the resulting payload. The rest is left for you. To make the translation work in integration with your application, add the following steps into the *executeRequest* method:
 
-* In you IDE, navigate to the LeonardoMlService, which is a part of the *machinelearning* package of the SAP S/4HANA Cloud SDK and investigate its methods. Also, looks through the other classes and methods provided in this library. You may also use the [Javadoc for those classes](https://help.sap.com/http.svc/rc/76ceac609c19443099fca151cf9c9e21/1.0/en-US/com/sap/cloud/sdk/services/scp/machinelearning/package-summary.html) to get more information.
+* In WebIDE, navigate to the LeonardoMlService, which is a part of the *machinelearning* package of the SAP S/4HANA Cloud SDK and investigate its methods. Also, looks through the other classes and methods provided in this library. You may also use the [Javadoc for those classes](https://help.sap.com/http.svc/rc/76ceac609c19443099fca151cf9c9e21/1.0/en-US/com/sap/cloud/sdk/services/scp/machinelearning/package-summary.html) to get more information.
 * Instantiate the *LeonardoMlService* class, which is a part of the SAP S/4HANA Cloud SDK component for ML services integration. Consider that you use trial beta as Cloud Foundry Leonardo ML service type and Translation as a Leonardo ML service type.
 * Create an object request of type *HttpPost*
 * Create an object body of type *HttpEntity* (*StringEntity*). Use *requestJson* and *ContentType.APPLICATION_JSON* to instantiate the object.
@@ -192,55 +193,28 @@ In this method, we already provide the logic for the execution of the translatio
 
 If you experience difficulties, you can compare you solution with the one provided in the [folder solutions](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/solutions/application/src/main/java/com/sap/cloud/s4hana/examples/addressmgr/machinelearning/commands/MlTranslationCommand.java).
 
-Build the latest version using the command:
-```
-mvn clean install
-```
+Build and test this version in WebIDE. If everything compiles successfully, push your changes into GitHub repository, as was explained in [Task 1](#task1).
 
 ### Create service instances for Leonardo ML integration
 In the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose ml-foundation-trial-beta. Instantiate the service with the defailt parameters and give it the name my-ml.
 ![SAP Leonardo Machine Learning](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/ml.PNG)
 
-### Deploy the application using the SAP Cloud Platform cockpit
+### Deploy the application using the Continuous Delivery Toolkit
 Finally, we will deploy the application in your development space in SAP Cloud Platform, Cloud Foundry, as it was done in the previous task.
 
-Firstly, go to your project *manifest.yml* file and add the service my-ml into the section "services" to make sure that the newly create machine learning service will be bound to our application. Please, see in the example below:
+Firstly, go to your project *mta.yaml* file and add the service my-ml into the section "requires" and "resources" to make sure that the newly create machine learning service will be bound to our application. Please, see in the example below:
 
-![Service bindings in the deployment descriptor manifest.yml](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/manifest.PNG)
-
+```diff
+- TODO: 
+add the example of the correct mta.yaml with bound ml service 
 ```
----
-applications:
+Push your changes into GitHub repository, as was explained in [Task 1](#task1).
 
-- name: address-manager-ml-Pxxxxxxxxxx
-  memory: 768M
-  random-route: true
-  path: application/target/address-manager-application.war
-  buildpack: sap_java_buildpack
-  env:
-    TARGET_RUNTIME: tomee
-    JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:96m..'
-    SET_LOGGING_LEVEL: '{ROOT: INFO, com.sap.cloud.sdk: INFO}'
-    ALLOW_MOCKED_AUTH_HEADER: true
-  services:
-    - my-xsuaa
-    - my-destination
-    - my-ml
+Now, go to your Jenkins and start the build for your project again.
+```diff
+- TODO: 
+add the screenshot
 ```
-
-In case you deploy using the Cloud Platform Cockpit and if you have already deployed the application in SAP Cloud Platform in Task 1, you would need to remove the previous instance (this is not required if you use Command Line Interface for the deployment). Also note that in productive scenarios the delition won't be required and you will achieve no downtime with the blue-green deployments with tools such as the [Continuous Delivery Toolkit](https://blogs.sap.com/2017/09/20/continuous-integration-and-delivery/).
-
-Then choose Application -> Deploy Application. Choose the location of your archive (see the folder application/target/address-manager-application.war) and the corresponding manifest.yml file, as shown in the Figure.
-
-![Application Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deployment.PNG)
-
-As the deployment descriptor of the application (manifest.yml) was containing the instructions to bind the application instance to the Machine Learning instance, we can also now see this binding in the cockpit. To investigate this, drill down to your deployed application and choose "Service Bindings", where you will find the binding the the instance my-ml.
-
-![SAP Leonardo ML service binding](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/mlServiceBinding.PNG)
-
-If you drill click the link "my-ml", you can see all the URLs of ML services, available in the scope of the chosed ml-foundation-trial-beta service. Those URLs are used behind the scenes by the SDK class LeonardoMlService to execute corresponding queries. Among others, you can also find the URL for the translation service that we connect in this code jam.
-
-![SAP Leonardo ML services information](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/mlURLs.PNG)
 
 When the application is deployed, you can drill down into the application, choose the link for the application and append "/address-manager" to it. You should be able to see the business partner coming back from the mock server and you should be able to translate their professions by clicking on them.
 
@@ -250,11 +224,12 @@ When the application is deployed, you can drill down into the application, choos
 
 Congratulations! You have just finished the main steps in this code jam:
 * Firstly, we have integrated SAP S/4HANA Business Partner APIs to read the list of business partners and to read the detailed information
-* Secondly, we have integrated SAP Leonardo Machine Learning functional service, using the Translation as an example.
+* Secondly, we have deployed the Continuous Delivery Toolkit of the S/4HANA Cloud SDK in our GKE cluster to continuously and automatically test, check, and deliver our applications.
+* Thirdly, we have integrated SAP Leonardo Machine Learning functional service, using the Translation as an example.
 
-Continue to the next steps in case you have time. Alternatively, you can execute those steps offline.
+Continue to the next steps in case you have time. 
 
-## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
+## <a name="task4">Bonus, Task 4: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
 Here, we will further investigate the capabilities of the SAP S/4HANA Cloud SDK virtual data model to integrate SAP S/4HANA now also for update, and delete operations.
 
 *	The class BusinessPartnerService already offers methods to create, update or delete address. The input values, such as the addresses or IDs to delete are member variables of the commands. They are passed into the command from the servlet.
@@ -274,4 +249,4 @@ Try to implement the queries by yourself. Feel free to check out the solution fo
 
 To test your logic, we have already prepared the tests. Go the the class AddressServletTest, which resides in the integration-tests module and remove all @Ignore annotations. Run the tests in this class and make sure that all tests are green. If not, get back to your commands and fix the issues.
 
-If the tests are successful, you can now deploy the application locally or in SAP Cloud Platform, as show before to test the new capabilities of your application from the user interface.
+If the tests are successful, you can now push your changes to GitHub again and start the Jenkins build and deployment
