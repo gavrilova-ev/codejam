@@ -10,6 +10,9 @@ So, let us get started!
 
 ## <a name="prerequisites">Technical prerequisites</a>
 You do not need any additional software installed locally for this code jam, as we will use the full stack WebIDE for development. All the steps of this code jam also are described considering that you re using the WebIDE.
+```diff
+- TODO: describe access to webIDE
+```
 
 Note that you can also use local development environment if you prefer. In case you want to use the local IDE, please make sure to follow the local setup and how to install the required software in the blog post [Step 1 with SAP S/4HANA Cloud SDK: Set up](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/). Make sure to install all the mentioned tool, including the IDE. 
 
@@ -26,7 +29,7 @@ Please, reach out to your instructors to get your cfredentials to this system.
 
 ## <a name="task0">Task 0: Preparation steps</a>
 Before, we get started with the actual implementation, we need to perform some preparation steps and familiarize ourselves with the project structure.
-* Download the [archive with the initial project version](https://github.com/gavrilova-ev/codejam/archive/master.zip) from the GitHub
+* Open and login into WebIDE. 
 * Load into your IDE as a Maven project
 * Investigate your project structure:
   * **application** folder contains the business logic that we will extend in this code jam. It also contains the JS based frontend components in the **webapp** subfolder. We will only focus on backend components, though.
