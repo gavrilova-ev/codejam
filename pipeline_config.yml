@@ -18,9 +18,7 @@ steps:
 #Stage Specific Configurations
 stages:
   staticCodeChecks:
-    findbugsExcludesFile:
-      - '**/com/sap/cloud/s4hana/examples/addressmgr/machinelearning/**'
-      - '**/com/sap/cloud/s4hana/examples/addressmgr/blockchain/**'
+    findbugsExcludesFile: 'spotbugs-exclude.xml'
     pmdExcludes:
       - '**/com/sap/cloud/s4hana/examples/addressmgr/machinelearning/**'
       - '**/com/sap/cloud/s4hana/examples/addressmgr/blockchain/**'
