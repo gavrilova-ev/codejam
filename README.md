@@ -14,12 +14,10 @@ You do not need any additional software installed locally for this code jam, as 
 - TODO: describe access to webIDE
 ```
 
-Note that you can also use local development environment if you prefer. In case you want to use the local IDE, please make sure to follow the local setup and how to install the required software in the blog post [Step 1 with SAP S/4HANA Cloud SDK: Set up](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/). Make sure to install all the mentioned tool, including the IDE. 
-
 ```diff
 - TODO: describe trial on GCP or remove (if an account is provided)
-```
 We will deploy the application in SAP Cloud Platform, Cloud Foundry. For that purpose, you would require your own trial account. [Here](https://cloudplatform.sap.com/try.html), you can find information on how to get your trial account in SAP Cloud Platform, Cloud Foundry. 
+```
 
 For this workshop, we provide a ready to use SAP S/4HANA system that you can integrate into your SAP Cloud Platform application using the APIs. You can address the system via the URL:
 ```diff
@@ -27,15 +25,26 @@ For this workshop, we provide a ready to use SAP S/4HANA system that you can int
 ```
 Please, reach out to your instructors to get your cfredentials to this system.
 
+We will share our source code via [GitHub](https://github.com/). So, you will require your own GitHub account for this CodeJam. If you do not already have one, please, make sure to Sign Up for GitHub, as proposed in the [initial page](https://github.com/).
+
 ## <a name="task0">Task 0: Preparation steps</a>
 Before, we get started with the actual implementation, we need to perform some preparation steps and familiarize ourselves with the project structure.
-* Open and login into WebIDE. 
-* Load into your IDE as a Maven project
+* We provide you with the GitHub repository for this codejam that includes the skeleton of the project you will extend with the S/4HANA and Leonardo ML Foundation integration capabilities. All you need to do is to fork this repository. All the steps in this code jam will be executed in your own fork of this repository.
+```diff
+- TODO: add screenshot -> forking the repo (after the repo is published)
+```
+* Open and login into WebIDE
+* Now, we will clone our new forked repository into our WebIDE workspace. In the WebIDE, choose the "Development" perspective, right click on "Workspace" -> Git -> Clone repository -> paste your repository URL and choose "Clone". This will create a local copy of your project in WebIDE. After the request is completed successfully, we can start investigating our predefined project structure.
 * Investigate your project structure:
+  * **.che** is a technical folder created automatically by WebIDE and is required to correctly interpret the projecgt structure and to build and run project
+  * Artifacts **cx-server**, **Jenkinsfile**, **pipeline_config.yml** help to set up and customize CI/CD server and the pipeline for your SDK based solutions. Those resources will be used to set up CI/CD pipeline for our application later. We also highly encourage you to check out [the related resources after the workshop](https://blogs.sap.com/2017/09/20/continuous-integration-and-delivery/)
+```diff
+- TODO
+```
+
   * **application** folder contains the business logic that we will extend in this code jam. It also contains the JS based frontend components in the **webapp** subfolder. We will only focus on backend components, though.
   * **integration-tests** and **unit-tests** folders include integration and unit tests. We have already prepared the integration tests for your application, they do not pass yet, though, and therefore are ignored for now.
   * **solutions** is another important folder that you can use when you get need help with the exercises and want to look up the solution. It contains the full source code of the solutions.
-  * Artifacts **cx-server**, **Jenkinsfile**, **pipeline_config.yml** help to set up and customize CI/CD server and the pipeline for your SDK based solutions. We will not cover this topic in this code jam, but we highly encourage you to check out [the related resources after the workshop](https://blogs.sap.com/2017/09/20/continuous-integration-and-delivery/)
   * **pom.xml** is a [maven configuration file](https://maven.apache.org/pom.html)
   * **manifest.yml** is a deployment descriptor to be able to deploy the application in SAP Cloud Platform, Cloud Foundry.
 
