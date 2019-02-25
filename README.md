@@ -40,8 +40,9 @@ For this workshop, we provide a ready to use SAP S/4HANA system that you can int
 ```diff
 - TODO: provide URL to CAL system
 ```
-Please, reach out to your instructors to get your cfredentials to this system.
+Please, reach out to your instructors to get your redentials to this system.
 
+### GitHub Account
 We will share our source code via [GitHub](https://github.com/). So, you will require your own GitHub account for this CodeJam. If you do not already have one, please, make sure to Sign Up for GitHub, as proposed in the [initial page](https://github.com/).
 
 ## <a name="task0">Task 0: Preparation steps</a>
