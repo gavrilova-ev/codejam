@@ -174,7 +174,7 @@ In the next step, we will see how to integrate one of the SAP Leonardo Machine L
 ## <a name="task3">Task 3: Integrate SAP Leonardo Machine Learning services</a>
 ```diff
 - TODO: 
-consider introducing the OCR use case (business cards)
+Intoduce OCR use case or modify the source code to work with API HUB ML services
 ```
 
 In this step, we will integrate SAP Leonardo Machine Learning services into an application using an example of the translation service, which is a part of the set of functional services.
@@ -209,12 +209,6 @@ In the cloud platform cockpit on the level of your development space choose Serv
 ### Deploy the application using the Continuous Delivery Toolkit
 Finally, we will deploy the application in your development space in SAP Cloud Platform, Cloud Foundry, as it was done in the previous task.
 
-Firstly, go to your project *mta.yaml* file and add the service my-ml into the section "requires" and "resources" to make sure that the newly create machine learning service will be bound to our application. Please, see in the example below:
-
-```diff
-- TODO: 
-add the example of the correct mta.yaml with bound ml service 
-```
 Push your changes into GitHub repository, as was explained in [Task 1](#task1).
 
 Now, go to your Jenkins and start the build for your project again.
