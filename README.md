@@ -61,9 +61,8 @@ Before, we get started with the actual implementation, we need to perform some p
     ** **pom.xml** is a [maven configuration file](https://maven.apache.org/pom.html)
   * **.gitignore** file is used to exclude certain files in your working directory from your Git history
   * **mta.yaml** is a build and deployment descriptor to be able to build and deploy the application in SAP Cloud Platform, Cloud Foundry.
-```diff
-- TODO: Provide solutions folder? Describe how to look it up?
-```
+  * **solutions** folder contains the solutions for the coding tasks of this code jam. Use it wisely :)
+
 
 Before we get started with the development, let us familiarize ourselves on how to build and execute tests of the application in WebIDE without deploying it in SAP Cloud Platform. That will help us to quickly test changes in the application that we will perform in the next steps.
 
@@ -109,10 +108,7 @@ The *GetAllBusinessPartnersCommand* should return a list of available business p
 The property *BusinessPartner.BUSINESS_PARTNER_CATEGORY* should equal *CATEGORY_PERSON*. To express that use the methods provided by the object *BusinessPartner.BUSINESS_PARTNER_CATEGORY*.
 * All the previous steps did not execute any requests, but just defined the request. With the method *execute* you finally execute the query and retrieve the result.
 
-```diff
-- TODO: Solution folder?
 Hint: Try to solve it on your own. However, the solution can also be found in the solution folder in the session material.
-```
 
 Now, also take a look at he command *GetSingleBusinessPartnerByIdCommand*. It was already implemented for you. Based on this source code, can you find out how the OData "expand" method can be implemented using the Virtual Data Model of the SAP S/4HANA Cloud SDK? Hint: addresses of business partners are retrieved using *expand*.
 
@@ -170,7 +166,7 @@ and adding the Jenkins configurations:
 test credentials
 deployment credentials
 ```
-https://developers.sap.com/tutorials/s4sdk-continuous-delivery-toolkit-setup.html
+[GKE CI/CD Tutorial](https://github.com/SAPDocuments/Tutorials/blob/73cd62ac35d1ecd0df14c2b1cac60eccac20107c/tutorials/s4sdk-continuous-delivery-toolkit-setup/s4sdk-continuous-delivery-toolkit-setup.md)
 
 If you still have time, continue with the next task.
 In the next step, we will see how to integrate one of the SAP Leonardo Machine Learning services into your application.
