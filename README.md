@@ -12,14 +12,30 @@ So, let us get started!
 ## <a name="prerequisites">Technical prerequisites</a>
 You do not need any additional software installed locally for this code jam, as we will use the full stack WebIDE for development. All the steps of this code jam also are described considering that you re using the WebIDE.
 ```diff
-- TODO: describe access to webIDE
+- TODO: remove this part if OP WebIDE is used
 ```
+### Set up Web IDE
+To get access to WebIDE, you can use your SAP Cloud Platform, Neo trial account:
+![Access SAP Cloud Platform, Neo account](https://github.com/gavrilova-ev/codejam/blob/master/docs/pictures/webIDE/Screenshot%202019-02-25%20at%2012.55.20.png)
+Then, navigate to Services and choose SAP Web IDE Full-Stack:
+![SAP Web IDE Full-Stack service](https://github.com/gavrilova-ev/codejam/blob/master/docs/pictures/webIDE/Screenshot%202019-02-25%20at%2012.56.46.png)
+Make sure that the service is enabled or enable it, at the end you should see the status "Enabled":
+![SAP Web IDE is enabled](https://github.com/gavrilova-ev/codejam/blob/master/docs/pictures/webIDE/Screenshot%202019-02-25%20at%2012.57.13.png)
+After that, choose "Go to Service" in the section "Take Action":
+![Go to service Web IDE](https://github.com/gavrilova-ev/codejam/blob/master/docs/pictures/webIDE/Screenshot%202019-02-25%20at%2012.57.36.png)
+After the Web IDE loads, you should see the workspace, where we will create a new project in the next steps:
+![Web IDE workspace](https://github.com/gavrilova-ev/codejam/blob/master/docs/pictures/webIDE/Screenshot%202019-02-25%20at%2012.58.45.png)
 
-```diff
-- TODO: describe trial on GCP or remove (if an account is provided)
-We will deploy the application in SAP Cloud Platform, Cloud Foundry. For that purpose, you would require your own trial account. [Here](https://cloudplatform.sap.com/try.html), you can find information on how to get your trial account in SAP Cloud Platform, Cloud Foundry. 
-```
+### Set up SAP Cloud Platform account
+We will deploy the application in SAP Cloud Platform, Cloud Foundry. For that purpose, you would require your own trial account. [Here](https://cloudplatform.sap.com/try.html), you can find information on how to get your trial account in SAP Cloud Platform, Cloud Foundry.
+You can choose different regions and infrastructure provider for your subaccounts in the menu section "Regions" after you have created your trial account. In the Regions section choose US Central (IA) on the GCP infrastructure:
+![SAP Cloud Platform account on Google Cloud Platform](https://github.com/gavrilova-ev/codejam/blob/master/docs/pictures/SCPaccount/Screenshot%202019-02-25%20at%2013.15.43.png)
+If you already have a trial account and want to reuse it, please make sure to have sufficient entitlements for the following services in the US Central (IA) region:
+Application runtime: 3 or more
+Destination: 1
+![Manage entitlements](https://github.com/gavrilova-ev/codejam/blob/master/docs/pictures/SCPaccount/Screenshot%202019-02-25%20at%2013.19.22.png)
 
+### SAP S/4HANA
 For this workshop, we provide a ready to use SAP S/4HANA system that you can integrate into your SAP Cloud Platform application using the APIs. You can address the system via the URL:
 ```diff
 - TODO: provide URL to CAL system
