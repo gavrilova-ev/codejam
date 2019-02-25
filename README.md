@@ -51,7 +51,7 @@ Before, we get started with the actual implementation, we need to perform some p
 - TODO: add screenshot -> forking the repo (after the repo is published)
 ```
 * Open and login into WebIDE
-* Now, we will clone our new forked repository into our WebIDE workspace. In the WebIDE, choose the "Development" perspective, right click on "Workspace" -> Git -> Clone repository -> paste your repository URL and choose "Clone". This will create a local copy of your project in WebIDE. After the request is completed successfully, we can start investigating our predefined project structure.
+* Now, we will clone our new forked repository into our WebIDE workspace. In the WebIDE, choose the "Development" perspective, right click on "Workspace" -> Git -> Clone repository -> paste the URL of your fork of the code jam and choose "Clone". This will create a local copy of your project in WebIDE. After the request is completed successfully, we can start investigating our predefined project structure.
 * Investigate your project structure:
   * **.che** is a technical folder created automatically by WebIDE and is required to correctly interpret the projecgt structure and to build and run project
   * Artifacts **cx-server**, **Jenkinsfile**, **pipeline_config.yml** help to set up and customize CI/CD server and the pipeline for your SDK based solutions. Those resources will be used to set up CI/CD pipeline for our application later. We also highly encourage you to check out [the related resources after the workshop](https://blogs.sap.com/2017/09/20/continuous-integration-and-delivery/)
@@ -123,11 +123,9 @@ To check whether the queries are implemented correctly, go to the integration-te
 Now, build and test the application as described in [Task 0](#task0) and make sure that the tests ran successfully. 
 
 If the unignored test do not show errors, congratulations! You have successfully integrated SAP S/4HANA with your application.
-IN this case, let us push the local changes into our remote GitHub repository. 
-```diff
-- TODO: 
-describe with screenshots how to push a changed Java file from WebIDE
-```
+In this case, let us push the local changes into our remote GitHub repository. 
+For that, choose "Git Pane" on the right, choose the files that you have modified, stage and commit and push:
+![Push to GitHub from Web IDE](https://github.com/gavrilova-ev/codejam/blob/master/docs/pictures/git/Screenshot%202019-02-25%20at%2013.30.25.png)
 
 Now, it is time to think about how we can continuously deliver this application.
 
