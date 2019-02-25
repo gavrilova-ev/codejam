@@ -162,8 +162,9 @@ Now, we are ready to deploy our application in SAP Cloud Platform, Cloud Foundry
 ### Set up Continuous Delivery Toolkit in GKE
 ```diff
 - TODO: 
-modify the linked Google next tutorial removing google next-specific points
-and adding the Jenkins configurations: 
+1. Discuss with Google: if each participant will create its own cluster or we have a central cluster with the pre-installed Jenkins -> adapt the tutorial accordingly
+2. Modify the linked Google next tutorial removing google next-specific points
+3. Adding the Jenkins configurations: 
 test credentials
 deployment credentials
 ```
