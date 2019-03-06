@@ -50,7 +50,7 @@ public class TranslateServlet extends HttpServlet
             
             // TODO: Prepare HttpPost query to translate "input"
             // TODO: 1. Get the Destination object from the SCP destination configuration using the S/4HANA Cloud SDK
-            // TODO: 2. Using the Destination object construct the API endpoint for API sandbox by combining info from destination and TRANSLATION_PATH
+            // TODO: 2. Using the Destination object construct the API endpoint for API sandbox by combining info from destination and TRANSLATION_PATH. Create HttpPost request using the created URL.
             // TODO: 3. Set additional postRequest headers: "Content-Type", "application/json" and "Accept", "application/json;charset=UTF-8"
             // TODO: 4. Using the Destination object retrieve APIKey and add it to the postReqwuest header
             
