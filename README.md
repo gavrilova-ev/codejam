@@ -174,38 +174,26 @@ If you still have time, continue with the next task.
 In the next step, we will see how to integrate one of the SAP Leonardo Machine Learning services into your application.
 
 ## <a name="task3">Task 3: Integrate SAP Leonardo Machine Learning services</a>
-```diff
-- TODO: 
-Intoduce OCR use case or modify the source code to work with API HUB ML services
-```
 
-In this step, we will integrate SAP Leonardo Machine Learning services into an application using an example of the translation service, which is a part of the set of functional services.
-
-There are several steps involved to make the integration with SAP Leonardo ML services work, those steps are described in details below:
-* Implement the integration with ML services in Java Backend
-* Create service instance for Leonardo ML integration
-* Deploy the application using the CI/CD pipeline prepared in the previous step
-
-### Implement the integration with ML services in Java Backend 
 The following step will explain how to quickly get an idea off the ground that requires integrating SAP Leonardo Machine Learning Foundation services found on SAP API Business Hub into an SAP Cloud Platform side-by-side extension using the SAP S/4HANA Cloud SDK. Please note that SAP Leonardo Machine Learning services in SAP API Hub are only intended for prototyping and not for production. For production, you would use use the service provisioning via SAP Cloud Platform service binding or the service keys, both leveraging the monitoring and security infrastructure of the platform. 
 In our application, we will use the translation service for the example implementation. To implement the integration with ML services, we will leverage the SAP S/4HANA Cloud SDK component that simplifies the integration.
 
-## Find the corresponding service in SAP API Hub
+### Find the corresponding service in SAP API Hub
 Firstly, go to SAP API Hub: https://api.sap.com/ and choose "Log On" on the right top corner of the screen.
 Type "translation" in the search and choose "Inference service for machine translation" from the found services. The documentation for the service opens up and you can see the metadata, try the service out and even generate the code by clicking "Code snippet". By clicking "Show API Key", you can get the API key specific for your user to authenticate against the API and we will use it later in the configuration in SAP Cloud Platform.
 
-## Create destination configuration in SAP Cloud Platform
+### Create destination configuration in SAP Cloud Platform
 Secondly, create a new destination configuration with the name sap_api_business_hub_ml in your SAP Cloud Platform account. This destination configuration should point to the sandbox system in SAP API hub and should include an additional parameter API_KEY with the value of your API key:
 ![API Hub destination](https://github.com/gavrilova-ev/codejam/blob/master/docs/pictures/SCPaccount/Screenshot%202019-03-06%20at%2018.33.35.png)
 
-## Implement missing pieces
+### Implement missing pieces
 Thirdly, to implement the integration with the created API Hub desctination, find the package *machinelearning* in your project, where you will find the *TranslateServlet* class. This class contains the method *doGet*, which does the translation from german to english language for the provided text in the input parameter. This servlet will be called from the application frontend every time, when a user clicks on a term, which is shown in german language on the screen.
 
-In this method, we already provide the implementation and leave some TODOs related to request building for you. In the code, you need to do the following steps to build HttpPost query:
-TODO: 1. Get the Destination object from the SCP destination configuration using the S/4HANA Cloud SDK. Hint: you might use the class DestinationAccessor of the S/4HANA Cloud SDK to get any destination configured in SCP by its name. <br>
-TODO: 2. Using the Destination object construct the API endpoint for API sandbox by combining info from destination and TRANSLATION_PATH. Create HttpPost request using the constructed URL. Hint: you can get the URL configured in the destination using the destination object create in TODO 1 and its method getUri() <br>
-TODO: 3. Set additional postRequest headers: "Content-Type", "application/json" and "Accept", "application/json;charset=UTF-8" Hint: this can be done using the setHeader() method on the HttpPost query. <br>
-TODO: 4. Using the Destination object retrieve APIKey and add it to the postReqwuest header. Hint: use the method getPropertiesByName() on the Desrtination object created in TODO 1 to retrieve corresponding API key. <br>
+In this method, we already provide the implementation and leave some TODOs related to request building for you. In the code, you need to do the following steps to build HttpPost query: <br>
+**TODO 1**: Get the Destination object from the SCP destination configuration using the S/4HANA Cloud SDK. Hint: you might use the class DestinationAccessor of the S/4HANA Cloud SDK to get any destination configured in SCP by its name. <br>
+**TODO 2**: Using the Destination object construct the API endpoint for API sandbox by combining info from destination and TRANSLATION_PATH. Create HttpPost request using the constructed URL. Hint: you can get the URL configured in the destination using the destination object create in TODO 1 and its method getUri() <br>
+**TODO 3**: Set additional postRequest headers: "Content-Type", "application/json" and "Accept", "application/json;charset=UTF-8" Hint: this can be done using the setHeader() method on the HttpPost query. <br>
+**TODO 4**:  Using the Destination object retrieve APIKey and add it to the postReqwuest header. Hint: use the method getPropertiesByName() on the Desrtination object created in TODO 1 to retrieve corresponding API key. <br>
 
 If you experience difficulties, you can compare you solution with the one provided in the [folder solutions](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/solutions/application/src/main/java/com/sap/cloud/s4hana/examples/addressmgr/machinelearning/commands/MlTranslationCommand.java).
 
