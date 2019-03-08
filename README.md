@@ -139,13 +139,10 @@ You can find the configuration of the destination endpoints on the level of your
 Then, you can create a new destination endpoint by choosing "New Destination".
 
 For the S/4HANA connectivity, create the destination with the following parameters. Make sure to put user credentials provided by the instructor. Those are the same credentials that you have used for testing in WebIDE in [Task 0](#task0) <br>
-```diff
-- TODO: 
-add correct S4 URL
-```
+
 Name: ErpQueryEndpoint <br>
 Type: HTTP <br>
-URL: https://odata-mock-server-shy-sitatunga.cfapps.eu10.hana.ondemand.com/ <br>
+URL: https://odata-mock-server-shiny-kudu.cfapps.us30.hana.ondemand.com/ <br>
 Proxy type: Internet <br>
 Authentication: BasicAuthentication <br>
 User: (username) <br>
