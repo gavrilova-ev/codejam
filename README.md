@@ -77,7 +77,7 @@ erp:
   default: "S4HANA"
   systems:
     - alias: "S4HANA"
-      uri: "https://odata-mock-server-shy-sitatunga.cfapps.eu10.hana.ondemand.com/"
+      uri: "https://odata-mock-server-shiny-kudu.cfapps.us30.hana.ondemand.com/"
 
 ```
 * In the same directory, create a `credentials.yml` file used during tests with the following content and make sure to put the correct name and password provided by the code jam instructor.
