@@ -1,6 +1,6 @@
 ---
 erp:
-  default: "MOCK_SYSTEM"
+  default: "S4HANA"
   systems:
 #    - alias: "ERP_SYSTEM"
 #      uri: "https://myXXXXXX.s4hana.ondemand.com"
