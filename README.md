@@ -85,7 +85,7 @@ credentials:
 
 After this, right clink on the "srv" folder and choose Build -> Build and Run Tests. Wait till the build finishes and make sure that you get "SUCCESS" for all the executed steps: Root, Application, Unit Tests, Integration Tests.
 
-Please note, if you are using SAP WebIDE on SAP CLoud Platform, you might need to explicitly configure SAP Cloud Platform, Cloud Foundry environment. This can be done in Preferences -> Cloud Foundry. >ou can set up API Endpoint, Organization, and Space there and also install Build in your space, which is required for the deployment of applications from WebIDE.  
+Please note, if you are using SAP WebIDE on SAP CLoud Platform, you might need to explicitly configure SAP Cloud Platform, Cloud Foundry environment. This can be done in Preferences -> Cloud Foundry. You can set up API Endpoint, Organization, and Space there and also install Build in your space, which is required for the deployment of applications from WebIDE.  
 
 Now, after we got familiar with the local testing of the application, let us start with the first step: integrating SAP S/4HANA into this application using the SAP S/4HANA Cloud SDK.
 
