@@ -122,7 +122,8 @@ Generally, you can use several ways to deploy your applications in SAP Cloud Pla
 In this task, we will setup the Continuous Delivery Toolkit on GKE and SAP Cloud Platform account - everything we need to successfully deploy our application in an automated manner in SAP Cloud Platform account.
 
 ### Prepare SAP Cloud Platform Account
-Here, we describe how to deploy your application manually using the SAP Cloud Platform, Cloud Foundry Cockpit. Necessary preliminary steps are also described here.
+Before we can deploy the application in SAP Cloud Platform, we need to prepare our SAP Cloud Platform account.
+Here, we are describing necessary preliminary steps:
 * Create service instances for S/4HANA connectivity
 * Create destination endpoints
 
