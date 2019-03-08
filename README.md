@@ -153,11 +153,12 @@ Now, we are ready to deploy our application in SAP Cloud Platform, Cloud Foundry
 ### Set up Continuous Delivery Toolkit in GKE
 ```diff
 - TODO: 
-1. Discuss with Google: if each participant will create its own cluster or we have a central cluster with the pre-installed Jenkins -> adapt the tutorial accordingly
-2. Modify the linked Google next tutorial removing google next-specific points
-3. Adding the Jenkins configurations: 
-test credentials
-deployment credentials
+Modify the linked Google next tutorial removing google next-specific points: 
+- Add information/screenshots on how to add the Jenkins configurations: test credentials, deployment credentials -> add this after "log in to Jenkins" and before "create new job"
+- When creating multibranch pipeline, no need to filter by branch (in case the codejam project is published in GitHub separately)
+- Change congrats text at the end, removing google-next
+- Remove the part from "Now click on the Console Output..." till "Clean up"
+
 ```
 [GKE CI/CD Tutorial](https://github.com/SAPDocuments/Tutorials/blob/73cd62ac35d1ecd0df14c2b1cac60eccac20107c/tutorials/s4sdk-continuous-delivery-toolkit-setup/s4sdk-continuous-delivery-toolkit-setup.md)
 
