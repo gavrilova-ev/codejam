@@ -45,9 +45,7 @@ We will share our source code via [GitHub](https://github.com/). So, you will re
 ## <a name="task0">Task 0: Preparation steps</a>
 Before, we get started with the actual implementation, we need to perform some preparation steps and familiarize ourselves with the project structure.
 * We provide you with the GitHub repository for this codejam that includes the skeleton of the project you will extend with the S/4HANA and Leonardo ML Foundation integration capabilities. All you need to do is to fork this repository. All the steps in this code jam will be executed in your own fork of this repository.
-```diff
-- TODO: add screenshot -> forking the repo (after the repo is published)
-```
+
 * Open and login into WebIDE
 * Now, we will clone our new forked repository into our WebIDE workspace. In the WebIDE, choose the "Development" perspective, right click on "Workspace" -> Git -> Clone repository -> paste the URL of your fork of the code jam and choose "Clone". This will create a local copy of your project in WebIDE. After the request is completed successfully, we can start investigating our predefined project structure.
 * Investigate your project structure:
@@ -66,11 +64,7 @@ Before we get started with the development, let us familiarize ourselves on how 
 
 While building the application, we will execute integration tests. For the integration tests, you need to provide the URL and credentials of your SAP S/4HANA system.
 * Open the file `srv/integration-tests/src/test/resources/systems.yml`.
-As we will be using the parameters of the provided SAP S/4HANA system in this code jam, please make sure that the file contains the following content. 
-```diff
-- TODO: Put correct S4 URL
-```
-
+As we will be using the parameters of the provided SAP S/4HANA system in this code jam, please make sure that the file contains the following content.
 ```
 ---
 erp:
