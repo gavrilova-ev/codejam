@@ -53,10 +53,10 @@ Before, we get started with the actual implementation, we need to perform some p
 * Investigate your project structure:
   * **.che** is a technical folder created automatically by WebIDE and is required to correctly interpret the projecgt structure and to build and run project
   * Artifacts **cx-server**, **Jenkinsfile**, **pipeline_config.yml** help to set up and customize CI/CD server and the pipeline for your SDK based solutions. Those resources will be used to set up CI/CD pipeline for our application later. We also highly encourage you to check out [the related resources after the workshop](https://blogs.sap.com/2017/09/20/continuous-integration-and-delivery/)
-  * **srv** folder and its artifacts:
-    ** **application** folder contains the business logic that we will extend in this code jam. It also contains the JS based frontend components in the **webapp** subfolder. We will only focus on backend components, though.
-    ** **integration-tests** and **unit-tests** folders include integration and unit tests. We have already prepared the integration tests for your application, they do not pass yet, though, and therefore are ignored for now.
-    ** **pom.xml** is a [maven configuration file](https://maven.apache.org/pom.html)
+  * **srv** folder and its artifacts: <br>
+    **application** folder contains the business logic that we will extend in this code jam. It also contains the JS based frontend components in the **webapp** subfolder. We will only focus on backend components, though.
+    **integration-tests** and **unit-tests** folders include integration and unit tests. We have already prepared the integration tests for your application, they do not pass yet, though, and therefore are ignored for now. <br>
+    **pom.xml** is a [maven configuration file](https://maven.apache.org/pom.html)
   * **.gitignore** file is used to exclude certain files in your working directory from your Git history
   * **mta.yaml** is a build and deployment descriptor to be able to build and deploy the application in SAP Cloud Platform, Cloud Foundry.
   * **solutions** folder contains the solutions for the coding tasks of this code jam. Use it wisely :)
