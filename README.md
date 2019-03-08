@@ -36,11 +36,8 @@ Destination: 1
 ![Manage entitlements](https://github.com/gavrilova-ev/codejam/blob/master/docs/pictures/SCPaccount/Screenshot%202019-02-25%20at%2013.19.22.png)
 
 ### SAP S/4HANA
-For this workshop, we provide a ready to use SAP S/4HANA system that you can integrate into your SAP Cloud Platform application using the APIs. You can address the system via the URL:
-```diff
-- TODO: provide URL to CAL system
-```
-Please, reach out to your instructors to get your redentials to this system.
+For this workshop, you can use the SAP S/4HANA system (you can ask the access information from your instructors) that we provide or the mock server available via the URL:
+https://odata-mock-server-shy-sitatunga.cfapps.eu10.hana.ondemand.com/
 
 ### GitHub Account
 We will share our source code via [GitHub](https://github.com/). So, you will require your own GitHub account for this CodeJam. If you do not already have one, please, make sure to Sign Up for GitHub, as proposed in the [initial page](https://github.com/).
