@@ -37,7 +37,7 @@ Destination: 1
 
 ### SAP S/4HANA
 For this workshop, you can use the SAP S/4HANA system (you can ask the access information from your instructors) that we provide or the mock server available via the URL:
-https://odata-mock-server-shy-sitatunga.cfapps.eu10.hana.ondemand.com/
+https://odata-mock-server-shiny-kudu.cfapps.us30.hana.ondemand.com/
 
 ### GitHub Account
 We will share our source code via [GitHub](https://github.com/). So, you will require your own GitHub account for this CodeJam. If you do not already have one, please, make sure to Sign Up for GitHub, as proposed in the [initial page](https://github.com/).
