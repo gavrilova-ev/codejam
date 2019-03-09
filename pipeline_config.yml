@@ -25,7 +25,7 @@ stages:
   integrationTests:
     credentials:
       - alias: 'MOCK_SYSTEM'
-        credentialId: 'MOCK'
+        credentialId: 'S4HANA'
 
 #  s4SdkQualityChecks:
 #    jacocoExcludes:
