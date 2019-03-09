@@ -157,7 +157,7 @@ Modify the linked Google next tutorial removing google next-specific points:
 - Add information/screenshots on how to add the Jenkins configurations: test credentials, deployment credentials -> add this after "log in to Jenkins" and before "create new job"
 - Add: "Configure your pipeline_config.yml to set up the correct organization name, where the application should be deployed" 
 - When creating multibranch pipeline, no need to filter by branch (in case the codejam project is published in GitHub separately)
-- Change congrats text at the end, removing google-next
+- Remove "Google Cloud Next" specific text everywhere, e.g. Intro (login on into GCP account), change congrats text at the end, removing google-next
 - Remove the part from "Now click on the Console Output..." till "Clean up"
 
 ```
