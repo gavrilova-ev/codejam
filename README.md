@@ -165,6 +165,10 @@ Modify the linked Google next tutorial removing google next-specific points:
 ```
 [GKE CI/CD Tutorial](https://github.com/SAPDocuments/Tutorials/blob/73cd62ac35d1ecd0df14c2b1cac60eccac20107c/tutorials/s4sdk-continuous-delivery-toolkit-setup/s4sdk-continuous-delivery-toolkit-setup.md)
 
+If the pipeline run successfully, you can now to to your account in SAP Cloud Platform and see the deployed application. There is one more minor configuration required to set it up. For simplicity of the flow, we did not secure our application as described e.g. [here](https://blogs.sap.com/2017/07/18/step-7-with-sap-s4hana-cloud-sdk-secure-your-application-on-sap-cloud-platform-cloudfoundry/). We encourage you to investigate this topic on your own after the workshop. So, as we do not have this setup in place, we will need a workaround that will help us to identify the current user and tenant information at runtime. For that, in SAP Cloud Platform, go to your newly deployed application and choose "User-Provided Variables". Choose "Add Variable" and enter **ALLOW_MOCKED_AUTH_HEADER** into the key field and **true** into the value field.
+Now, go back to the Overview and restart your application. After it is restarted, go to the URL under "Application Routes" and add "/address-manager" to the URL. You should now be able to see the business partner coming from S/4HANA system.
+
+
 If you still have time, continue with the next task.
 In the next step, we will see how to integrate one of the SAP Leonardo Machine Learning services into your application.
 
