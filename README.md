@@ -222,7 +222,7 @@ Finally, we will deploy the application in your development space in SAP Cloud P
 
 Push your changes into GitHub repository, as was explained in [Task 1](#task1).
 
-Continuous Delivery Toolkit of the SAP S/4HANA Cloud SDK uses the concept of the blue-green-deployment. In case you are using the trial account of SAP Cloud Platform, it might be that you would need to remove an application (e.g. WebIDE builder, which won't be required in the code jam anymore) before you start the deployment.
+Continuous Delivery Toolkit of the SAP S/4HANA Cloud SDK uses the concept of the blue-green-deployment. In case you are using the trial account of SAP Cloud Platform, it might be that you would need to clean up your space before you start the deployment. You would need at leaat 1 GB free in you account before starting the deployment.
 
 Now, go to your Jenkins and start the build for your project again.
 ```diff
