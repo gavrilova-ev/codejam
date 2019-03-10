@@ -2,10 +2,9 @@
 Here, we provide the instructions to proceed with the code jam "SAP Leonardo Machine Learning and the SAP S/4HANA Cloud SDK". Below, you find the following information:
 * [Technical prerequisites](#prerequisites): setup required to execute the steps described in this documentation. This information was provided before the workshop, so, we assume that those prerequisites are already fulfilled. Nevertheless, you can use this description to double check.
 * [Task 0: Preparation steps](#task0)
-* [Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model](#task1)
+* [Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model (including the bonus task)](#task1)
 * [Task 2: Set up the Continuous Delivery Toolkit and the CI/CD pipeline of the S/4HANA Cloud SDK in GKE](#task2)
 * [Task 3: Integrate SAP Leonardo Machine Learning service to provide translations](#task3)
-* [Bonus, Task 4: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model](#task4)
 
 So, let us get started!
 
@@ -114,6 +113,28 @@ In this case, let us push the local changes into our remote GitHub repository.
 For that, choose "Git Pane" on the right, choose the files that you have modified, stage and commit and push:
 ![Push to GitHub from Web IDE](https://github.com/gavrilova-ev/codejam/blob/master/docs/pictures/git/Screenshot%202019-02-25%20at%2013.30.25.png)
 
+### Optional tasks (if you still have time till the next task): Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model
+Here, we will further investigate the capabilities of the SAP S/4HANA Cloud SDK virtual data model to integrate SAP S/4HANA now also for update, and delete operations. Do this task only in case you were fast with the implementation of the read operation and there are at least 15 minutes left before the next task starts.
+
+*	The class BusinessPartnerService already offers methods to create, update or delete address. The input values, such as the addresses or IDs to delete are member variables of the commands. They are passed into the command from the servlet.
+*	Implement the run methods in the commands UpdateAddressCommand and DeleteAddressCommand. 
+*	For the delete method we first have to create a business partner address instance, which has the IDs for the business partner and the address specified. The class BusinessPartnerAddress offers the method builder to create a builder and can be used as follows:
+
+```
+BusinessPartnerAddress addressToDelete = BusinessPartnerAddress.builder()
+        .businessPartner(businessPartnerId)
+        .addressID(addressId)
+        .build();
+```
+
+*	Two commands expect an integer to be returned as result. These integers should correspond to the status code returned from SAP S/4HANA as result of the modification. You can simple call getHttpStatusCode to get the status code back.
+
+Try to implement the queries by yourself. Feel free to check out the solution folder that we have prepared for you in case you are experiencing difficulties.
+
+To test your logic, we have already prepared the tests. Go the the class AddressServletTest, which resides in the integration-tests module and remove all @Ignore annotations. Run the tests in this class and make sure that all tests are green. If not, get back to your commands and fix the issues.
+
+If the tests are successful, you can now push your changes to GitHub again.
+
 Now, it is time to think about how we can continuously deliver this application.
 
 ## <a name="task2">Task 2: Set up the Continuous Delivery Toolkit and the CI/CD pipeline of the S/4HANA Cloud SDK in GKE</a>
@@ -219,27 +240,3 @@ Congratulations! You have just finished the main steps in this code jam:
 * Firstly, we have integrated SAP S/4HANA Business Partner APIs to read the list of business partners and to read the detailed information
 * Secondly, we have deployed the Continuous Delivery Toolkit of the S/4HANA Cloud SDK in our GKE cluster to continuously and automatically test, check, and deliver our applications.
 * Thirdly, we have integrated SAP Leonardo Machine Learning functional service, using the Translation as an example.
-
-Continue to the next steps in case you have time. 
-
-## <a name="task4">Bonus, Task 4: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
-Here, we will further investigate the capabilities of the SAP S/4HANA Cloud SDK virtual data model to integrate SAP S/4HANA now also for update, and delete operations.
-
-*	The class BusinessPartnerService already offers methods to create, update or delete address. The input values, such as the addresses or IDs to delete are member variables of the commands. They are passed into the command from the servlet.
-*	Implement the run methods in the commands UpdateAddressCommand and DeleteAddressCommand. 
-*	For the delete method we first have to create a business partner address instance, which has the IDs for the business partner and the address specified. The class BusinessPartnerAddress offers the method builder to create a builder and can be used as follows:
-
-```
-BusinessPartnerAddress addressToDelete = BusinessPartnerAddress.builder()
-        .businessPartner(businessPartnerId)
-        .addressID(addressId)
-        .build();
-```
-
-*	Two commands expect an integer to be returned as result. These integers should correspond to the status code returned from SAP S/4HANA as result of the modification. You can simple call getHttpStatusCode to get the status code back.
-
-Try to implement the queries by yourself. Feel free to check out the solution folder that we have prepared for you in case you are experiencing difficulties.
-
-To test your logic, we have already prepared the tests. Go the the class AddressServletTest, which resides in the integration-tests module and remove all @Ignore annotations. Run the tests in this class and make sure that all tests are green. If not, get back to your commands and fix the issues.
-
-If the tests are successful, you can now push your changes to GitHub again and start the Jenkins build and deployment
