@@ -217,12 +217,12 @@ In this method, we already provide the implementation and leave some TODOs relat
 
 If you experience difficulties, you can compare you solution with the one provided in the [folder solutions](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/solutions/application/src/main/java/com/sap/cloud/s4hana/examples/addressmgr/machinelearning/commands/MlTranslationCommand.java).
 
-Build and test this version in WebIDE. If everything compiles successfully, push your changes into GitHub repository, as was explained in [Task 1](#task1).
-
 ### Deploy the application using the Continuous Delivery Toolkit
 Finally, we will deploy the application in your development space in SAP Cloud Platform, Cloud Foundry, as it was done in the previous task.
 
 Push your changes into GitHub repository, as was explained in [Task 1](#task1).
+
+Continuous Delivery Toolkit of the SAP S/4HANA Cloud SDK uses the concept of the blue-green-deployment. In case you are using the trial account of SAP Cloud Platform, it might be that you would need to remove an application (e.g. WebIDE builder, which won't be required in the code jam anymore) before you start the deployment.
 
 Now, go to your Jenkins and start the build for your project again.
 ```diff
