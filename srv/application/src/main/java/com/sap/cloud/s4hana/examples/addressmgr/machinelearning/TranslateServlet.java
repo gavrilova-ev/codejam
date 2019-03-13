@@ -48,7 +48,7 @@ public class TranslateServlet extends HttpServlet
 
             String requestJson = createRequestJson(sourceLang, targetLang, source);
 
-            // TODO: Prepare HttpPost query to translate "input"
+            // Prepare HttpPost query to translate "input"
             // TODO 1. Get the Destination object from the SCP destination configuration using the S/4HANA Cloud SDK
             // final Destination mlDestination = DestinationAccessor.getDestination("sap_api_business_hub_ml");
 
@@ -66,7 +66,7 @@ public class TranslateServlet extends HttpServlet
             //}
             //postRequest.setHeader("APIKey", apiKey);
 
-            // TODO: Add body, execute the request and parse the response
+            // TODO 5. Add body, execute the request and parse the response
             /*
             // Add http body
             HttpEntity body = new StringEntity(requestJson, ContentType.APPLICATION_JSON);
